@@ -1,4 +1,5 @@
 import "dotenv/config";
+import "./plugins/mongoose";
 import app from "./app";
 
 let listener = app.listen(
