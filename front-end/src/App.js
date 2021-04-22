@@ -1,24 +1,36 @@
-import logo from "./logo.svg";
-import "./App.css";
+import { useContext } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import AuthenticatedRoute from "./components/AuthenticatedRoute";
+import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
+
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import Missing from "./pages/Missing";
+
+import { Context } from "./store/useGlobalState";
 
 function App() {
+	const { state } = useContext(Context);
 	return (
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
-			</header>
-		</div>
+		<BrowserRouter>
+			<Switch>
+				<UnauthenticatedRoute
+					exact
+					path="/login"
+					redirect="/"
+					isAuthenticated={state.user?.username}
+					component={Login}
+				/>
+				<AuthenticatedRoute
+					exact
+					path="/"
+					redirect="/login"
+					isAuthenticated={state.user?.username}
+					component={Dashboard}
+				/>
+				<Route path="*" component={Missing} />
+			</Switch>
+		</BrowserRouter>
 	);
 }
 
