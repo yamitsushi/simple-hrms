@@ -1,10 +1,10 @@
 import express from "express";
 
-import { postLogin, postRegister } from "../controllers/AuthController";
+import { postLogin, checkUser } from "../controllers/AuthController";
 
 const routes = express.Router();
 
-routes.get("/", postRegister);
+routes.get("/", checkUser);
 
 routes.post("/login", postLogin);
 

@@ -2,6 +2,10 @@ import User from "../models/Users";
 
 import bcrypt from "bcrypt";
 
+function checkUser(request, response) {
+	response.json(request.session.user);
+}
+
 function postRegister(request, response) {
 	const user = new User({
 		username: request.body.username,
@@ -17,7 +21,10 @@ function postLogin(request, response) {
 	User.findOne({ username: request.body.username })
 		.then((user) => {
 			bcrypt.compare(request.body.password, user.password, (_error, result) => {
-				if (result) return response.json(user);
+				if (result) {
+					request.session.user = user;
+					return response.json(user);
+				}
 				return response.status(401).json({
 					title: "Login Failed",
 					message: "Incorrect Password",
@@ -32,4 +39,4 @@ function postLogin(request, response) {
 		});
 }
 
-export { postRegister, postLogin };
+export { postRegister, postLogin, checkUser };
