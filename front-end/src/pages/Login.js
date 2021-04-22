@@ -10,6 +10,7 @@ import {
 	Typography,
 	Container,
 } from "@material-ui/core";
+import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "../plugins/axios";
 import { Context } from "../store/useGlobalState";
 
@@ -36,6 +37,7 @@ const Login = () => {
 
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const [message, setMessage] = useState("");
 
 	function loginSubmit(e) {
 		e.preventDefault();
@@ -52,7 +54,8 @@ const Login = () => {
 				history.push("/");
 			})
 			.catch((error) => {
-				alert(error.message);
+				setMessage(error.response.data);
+				console.log(message);
 			});
 	}
 
@@ -63,6 +66,18 @@ const Login = () => {
 				<Typography component="h1" variant="h5">
 					Sign in
 				</Typography>
+				{message && (
+					<Alert
+						severity="error"
+						onClose={() => {
+							setMessage();
+						}}
+					>
+						<AlertTitle>{message.title}</AlertTitle>
+						{message.message}
+					</Alert>
+				)}
+
 				<form className={classes.form} id="login-form">
 					<TextField
 						variant="outlined"
