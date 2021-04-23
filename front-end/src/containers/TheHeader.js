@@ -44,7 +44,7 @@ const TheHeader = () => {
         className="ml-3 d-md-down-none"
         onClick={toggleSidebar}
       />
-      <CHeaderBrand className="mx-auto d-lg-none" to="/">
+      <CHeaderBrand className="mx-auto d-lg-none" to="/dashboard">
         <h1>HRMS Demo</h1>
       </CHeaderBrand>
 

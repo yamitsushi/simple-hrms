@@ -24,7 +24,7 @@ const TheSidebar = () => {
       show={show}
       onShowChange={(val) => dispatch({ type: "set", sidebarShow: val })}
     >
-      <CSidebarBrand className="d-md-down-none" to="/">
+      <CSidebarBrand className="d-md-down-none" to="/dashboard">
         <h1>HRMS Demo</h1>
       </CSidebarBrand>
       <CSidebarNav>
