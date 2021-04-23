@@ -7,8 +7,18 @@ import {
   CImg,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import axiosInstance from "src/plugins/axios";
+import { useHistory } from "react-router";
 
 const TheHeaderDropdown = () => {
+  const history = useHistory();
+
+  const logout = () => {
+    axiosInstance.post("/logout").then((response) => {
+      history.push("/login");
+    });
+  };
+
   return (
     <CDropdown inNav className="c-header-nav-items mx-2" direction="down">
       <CDropdownToggle className="c-header-nav-link" caret={false}>
@@ -29,7 +39,7 @@ const TheHeaderDropdown = () => {
           Settings
         </CDropdownItem>
         <CDropdownItem divider />
-        <CDropdownItem to="/login">
+        <CDropdownItem onClick={logout}>
           <CIcon name="cil-lock-locked" className="mfe-2" />
           Logout
         </CDropdownItem>
