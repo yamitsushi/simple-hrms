@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./scss/style.scss";
 
 const loading = (
@@ -18,7 +18,7 @@ const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
 class App extends Component {
   render() {
     return (
-      <HashRouter>
+      <BrowserRouter>
         <React.Suspense fallback={loading}>
           <Switch>
             <Route
@@ -40,7 +40,7 @@ class App extends Component {
             />
           </Switch>
         </React.Suspense>
-      </HashRouter>
+      </BrowserRouter>
     );
   }
 }
