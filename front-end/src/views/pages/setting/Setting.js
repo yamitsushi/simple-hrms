@@ -42,6 +42,7 @@ const Setting = () => {
                       <CInput
                         {...register("old_password", { required: true })}
                         id="old_password"
+                        type="password"
                         required
                       />
                     </CFormGroup>
@@ -54,6 +55,7 @@ const Setting = () => {
                       <CInput
                         {...register("password", { required: true })}
                         id="password"
+                        type="password"
                         required
                       />
                     </CFormGroup>
@@ -68,6 +70,7 @@ const Setting = () => {
                       <CInput
                         {...register("confirm_password", { required: true })}
                         id="confirm_password"
+                        type="password"
                         required
                       />
                     </CFormGroup>
