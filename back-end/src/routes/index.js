@@ -1,11 +1,17 @@
 import express from "express";
 
-import { postLogin, checkUser } from "../controllers/AuthController";
+import {
+	postLogin,
+	checkUser,
+	postChangePassword,
+	postLogout,
+} from "../controllers/AuthController";
 
-const routes = express.Router();
+const Route = express.Router();
 
-routes.get("/", checkUser);
+Route.get("/", checkUser);
+Route.post("/login", postLogin);
+Route.post("/change-password", postChangePassword);
+Route.post("/logout", postLogout);
 
-routes.post("/login", postLogin);
-
-export default routes;
+export default Route;
