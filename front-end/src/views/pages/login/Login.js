@@ -30,7 +30,7 @@ const Login = () => {
     axiosInstance
       .post("/login", data)
       .then((response) => {
-        history.push("/");
+        history.push("/dashboard");
       })
       .catch((err) => {
         alert("Authentication Failed");
