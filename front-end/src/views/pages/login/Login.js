@@ -27,9 +27,14 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    axiosInstance.post("/login", data).then((response) => {
-      history.push("/");
-    });
+    axiosInstance
+      .post("/login", data)
+      .then((response) => {
+        history.push("/");
+      })
+      .catch((err) => {
+        alert("Authentication Failed");
+      });
   };
 
   return (
