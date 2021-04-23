@@ -1,37 +1,48 @@
-import { useContext } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import AuthenticatedRoute from "./components/AuthenticatedRoute";
-import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
+import React, { Component } from "react";
+import { HashRouter, Route, Switch } from "react-router-dom";
+import "./scss/style.scss";
 
-import Dashboard from "./pages/Dashboard";
-import Login from "./pages/Login";
-import Missing from "./pages/Missing";
+const loading = (
+  <div className="pt-3 text-center">
+    <div className="sk-spinner sk-spinner-pulse"></div>
+  </div>
+);
 
-import { Context } from "./store/useGlobalState";
+// Containers
+const TheLayout = React.lazy(() => import("./containers/TheLayout"));
 
-function App() {
-	const { state } = useContext(Context);
-	return (
-		<BrowserRouter>
-			<Switch>
-				<UnauthenticatedRoute
-					exact
-					path="/login"
-					redirect="/"
-					isAuthenticated={state.user?.username}
-					component={Login}
-				/>
-				<AuthenticatedRoute
-					exact
-					path="/"
-					redirect="/login"
-					isAuthenticated={state.user?.username}
-					component={Dashboard}
-				/>
-				<Route path="*" component={Missing} />
-			</Switch>
-		</BrowserRouter>
-	);
+// Pages
+const Login = React.lazy(() => import("./views/pages/login/Login"));
+const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
+
+class App extends Component {
+  render() {
+    return (
+      <HashRouter>
+        <React.Suspense fallback={loading}>
+          <Switch>
+            <Route
+              exact
+              path="/login"
+              name="Login Page"
+              render={(props) => <Login {...props} />}
+            />
+            <Route
+              exact
+              path="/404"
+              name="Page 404"
+              render={(props) => <Page404 {...props} />}
+            />
+            <Route
+              path="/"
+              name="Home"
+              render={(props) => <TheLayout {...props} />}
+            />
+          </Switch>
+        </React.Suspense>
+      </HashRouter>
+    );
+  }
 }
 
 export default App;
