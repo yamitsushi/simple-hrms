@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import AuthenticatedRoute from "./plugins/AuthenticatedRoute";
+import UnauthenticatedRoute from "./plugins/UnauthenticatedRoute";
 import "./scss/style.scss";
 
 const loading = (
@@ -17,15 +19,16 @@ const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
 
 class App extends Component {
   render() {
+    console.log(this.props);
     return (
       <BrowserRouter>
         <React.Suspense fallback={loading}>
           <Switch>
-            <Route
+            <UnauthenticatedRoute
               exact
               path="/login"
               name="Login Page"
-              render={(props) => <Login {...props} />}
+              component={Login}
             />
             <Route
               exact
@@ -33,11 +36,7 @@ class App extends Component {
               name="Page 404"
               render={(props) => <Page404 {...props} />}
             />
-            <Route
-              path="/"
-              name="Home"
-              render={(props) => <TheLayout {...props} />}
-            />
+            <AuthenticatedRoute path="/" name="Home" component={TheLayout} />
           </Switch>
         </React.Suspense>
       </BrowserRouter>

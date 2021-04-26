@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
   CCard,
@@ -13,6 +13,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button } from "@material-ui/core";
 import axiosInstance from "src/plugins/axios";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { set } from "src/store/actions/authReducer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
   const { control, handleSubmit } = useForm();
@@ -30,13 +33,22 @@ const Login = () => {
   const onSubmit = (data) => {
     axiosInstance
       .post("/login", data)
-      .then((response) => {
+      .then(({ data }) => {
+        dispatch(set(data));
         history.push("/dashboard");
       })
       .catch((err) => {
         alert("Authentication Failed");
       });
   };
+
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    axiosInstance.get("/").then(({ data }) => {
+      dispatch(set(data));
+      history.push("/dashboard");
+    });
+  }, []);
 
   return (
     <div className="c-app c-default-layout flex-row align-items-center">

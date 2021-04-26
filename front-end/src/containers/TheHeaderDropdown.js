@@ -9,12 +9,16 @@ import {
 import CIcon from "@coreui/icons-react";
 import axiosInstance from "src/plugins/axios";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { set } from "src/store/actions/authReducer";
 
 const TheHeaderDropdown = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const logout = () => {
     axiosInstance.post("/logout").then((response) => {
+      dispatch(set(""));
       history.push("/login");
     });
   };
