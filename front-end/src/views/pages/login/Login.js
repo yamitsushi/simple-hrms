@@ -1,30 +1,31 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import {
-  CButton,
   CCard,
   CCardBody,
+  CCardFooter,
   CCardGroup,
   CCol,
   CContainer,
-  CForm,
-  CInput,
-  CInputGroup,
-  CInputGroupPrepend,
-  CInputGroupText,
   CRow,
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
+import { makeStyles } from "@material-ui/core/styles";
+import { TextField, FormGroup, Button } from "@material-ui/core";
 import axiosInstance from "src/plugins/axios";
 import { useHistory } from "react-router";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+    },
+  },
+}));
+
 const Login = () => {
+  const classes = useStyles();
   const history = useHistory();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { control, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
     axiosInstance
@@ -44,44 +45,51 @@ const Login = () => {
           <CCol md="4">
             <CCardGroup>
               <CCard className="p-4">
-                <CCardBody>
-                  <CForm onSubmit={handleSubmit(onSubmit)}>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className={classes.root}
+                >
+                  <CCardBody>
                     <h1>Login</h1>
                     <p className="text-muted">Sign In to your account</p>
-                    {errors.username && <span>This field is required</span>}
-                    <CInputGroup className="mb-3">
-                      <CInputGroupPrepend>
-                        <CInputGroupText>
-                          <CIcon name="cil-user" />
-                        </CInputGroupText>
-                      </CInputGroupPrepend>
-                      <CInput
-                        {...register("username", { required: true })}
-                        placeholder="Username"
-                      />
-                    </CInputGroup>
-                    {errors.password && <span>This field is required</span>}
-                    <CInputGroup className="mb-4">
-                      <CInputGroupPrepend>
-                        <CInputGroupText>
-                          <CIcon name="cil-lock-locked" />
-                        </CInputGroupText>
-                      </CInputGroupPrepend>
-                      <CInput
-                        {...register("password", { required: true })}
-                        type="password"
-                        placeholder="Password"
-                      />
-                    </CInputGroup>
-                    <CRow>
-                      <CCol xs="6">
-                        <CButton color="primary" className="px-4" type="submit">
-                          Login
-                        </CButton>
-                      </CCol>
-                    </CRow>
-                  </CForm>
-                </CCardBody>
+                    <Controller
+                      name="username"
+                      control={control}
+                      defaultValue=""
+                      render={({ field }) => (
+                        <TextField
+                          label="Username"
+                          variant="outlined"
+                          type="string"
+                          fullWidth
+                          {...field}
+                          required
+                        />
+                      )}
+                    />
+
+                    <Controller
+                      name="password"
+                      control={control}
+                      defaultValue=""
+                      render={({ field }) => (
+                        <TextField
+                          label="Password"
+                          variant="outlined"
+                          type="password"
+                          fullWidth
+                          {...field}
+                          required
+                        />
+                      )}
+                    />
+                  </CCardBody>
+                  <CCardFooter>
+                    <Button variant="contained" color="primary" type="submit">
+                      Login
+                    </Button>
+                  </CCardFooter>
+                </form>
               </CCard>
             </CCardGroup>
           </CCol>

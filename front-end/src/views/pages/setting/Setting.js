@@ -1,21 +1,28 @@
 import {
-  CButton,
   CCard,
   CCardBody,
+  CCardFooter,
   CCardHeader,
   CCol,
-  CForm,
-  CFormGroup,
-  CInput,
-  CLabel,
   CRow,
 } from "@coreui/react";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import { makeStyles } from "@material-ui/core/styles";
+import { TextField, FormGroup, Button } from "@material-ui/core";
 import axiosInstance from "src/plugins/axios";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+    },
+  },
+}));
+
 const Setting = () => {
-  const { register, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm();
+  const classes = useStyles();
 
   const onSubmit = (data) => {
     axiosInstance
@@ -32,59 +39,61 @@ const Setting = () => {
       <CRow>
         <CCol xs="12" sm="6">
           <CCard>
-            <CCardHeader>Change Password</CCardHeader>
-            <CCardBody>
-              <CForm onSubmit={handleSubmit(onSubmit)}>
-                <CRow>
-                  <CCol xs="12">
-                    <CFormGroup>
-                      <CLabel htmlFor="old_password">Old Password</CLabel>
-                      <CInput
-                        {...register("old_password", { required: true })}
-                        id="old_password"
-                        type="password"
-                        required
-                      />
-                    </CFormGroup>
-                  </CCol>
-                </CRow>
-                <CRow>
-                  <CCol xs="12">
-                    <CFormGroup>
-                      <CLabel htmlFor="password">New Password</CLabel>
-                      <CInput
-                        {...register("password", { required: true })}
-                        id="password"
-                        type="password"
-                        required
-                      />
-                    </CFormGroup>
-                  </CCol>
-                </CRow>
-                <CRow>
-                  <CCol xs="12">
-                    <CFormGroup>
-                      <CLabel htmlFor="confirm_password">
-                        Confirm Password
-                      </CLabel>
-                      <CInput
-                        {...register("confirm_password", { required: true })}
-                        id="confirm_password"
-                        type="password"
-                        required
-                      />
-                    </CFormGroup>
-                  </CCol>
-                </CRow>
-                <CRow>
-                  <CCol xs="12">
-                    <CButton color="primary" type="submit">
-                      Change Password
-                    </CButton>
-                  </CCol>
-                </CRow>
-              </CForm>
-            </CCardBody>
+            <form onSubmit={handleSubmit(onSubmit)} className={classes.root}>
+              <CCardHeader>Change Password</CCardHeader>
+              <CCardBody>
+                <Controller
+                  name="old_password"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <TextField
+                      label="Old Password"
+                      variant="outlined"
+                      type="password"
+                      fullWidth
+                      {...field}
+                      required
+                    />
+                  )}
+                />
+                <Controller
+                  name="password"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <TextField
+                      label="Password"
+                      variant="outlined"
+                      type="password"
+                      fullWidth
+                      {...field}
+                      required
+                    />
+                  )}
+                />
+                <Controller
+                  name="confirm_password"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <TextField
+                      label="Confirm Password"
+                      variant="outlined"
+                      type="password"
+                      fullWidth
+                      {...field}
+                      required
+                    />
+                  )}
+                />
+              </CCardBody>
+              <CCardFooter>
+                <Button variant="contained" color="primary" type="submit">
+                  Change Password
+                </Button>
+              </CCardFooter>
+            </form>
           </CCard>
         </CCol>
       </CRow>
