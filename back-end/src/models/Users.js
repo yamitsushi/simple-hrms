@@ -4,14 +4,31 @@ const Users = mongoose.Schema(
 	{
 		username: {
 			type: String,
-			index: true,
-			require: true,
-			trim: true,
+			unique: true,
+			required: true,
 		},
 		password: {
 			type: String,
-			require: true,
-			trim: true,
+			required: true,
+			select: false,
+		},
+		name: {
+			type: String,
+			required: true,
+		},
+		picture: {
+			type: String,
+		},
+		department: {
+			type: String,
+			required: true,
+		},
+		position: {
+			type: String,
+			required: true,
+		},
+		email: {
+			type: String,
 		},
 	},
 	{
