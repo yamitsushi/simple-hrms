@@ -9,7 +9,7 @@ const Routes = Router();
 
 Routes.get("/", getCurrentUser);
 Routes.post("/login", postLogin);
-Routes.post("/change_password", postChangePassword);
+Routes.post("/change-password", postChangePassword);
 Routes.post("/logout", postLogout);
 
 export default Routes;
