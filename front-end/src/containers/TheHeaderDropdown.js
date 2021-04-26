@@ -10,7 +10,7 @@ import CIcon from "@coreui/icons-react";
 import axiosInstance from "src/plugins/axios";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
-import { set } from "src/store/actions/authReducer";
+import { set } from "src/store/actions/authAction";
 
 const TheHeaderDropdown = () => {
   const dispatch = useDispatch();
