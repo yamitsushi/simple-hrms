@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import { CModal, CModalBody, CProgress } from "@coreui/react";
+import { useSelector, useDispatch } from "react-redux";
+import { purge } from "src/store/actions/authAction";
 
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
@@ -12,6 +14,8 @@ const axiosInstance = axios.create({
 
 const LoadingModal = () => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.id);
 
   axiosInstance.interceptors.request.use((config) => {
     setLoading(true);
@@ -25,8 +29,7 @@ const LoadingModal = () => {
     },
     (error) => {
       setLoading(false);
-      // pending
-      // clear user if returned 401 error and have user
+      if (error.response.status === 401 && user) dispatch(purge());
       return Promise.reject(error);
     }
   );
