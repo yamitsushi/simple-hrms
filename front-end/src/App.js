@@ -19,7 +19,6 @@ const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
 
 class App extends Component {
   render() {
-    console.log(this.props);
     return (
       <BrowserRouter>
         <React.Suspense fallback={loading}>
