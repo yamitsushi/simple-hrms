@@ -18,6 +18,11 @@ import navigation from "./_nav";
 const TheSidebar = () => {
   const dispatch = useDispatch();
   const show = useSelector((state) => state.sidebar.show);
+  const position = useSelector((state) => state.auth.position);
+
+  const filter = navigation.filter((item) =>
+    !item.lock ? true : item.lock === position
+  );
 
   return (
     <CSidebar show={show} onShowChange={(val) => dispatch(set(val))}>
@@ -26,7 +31,7 @@ const TheSidebar = () => {
       </CSidebarBrand>
       <CSidebarNav>
         <CCreateElement
-          items={navigation}
+          items={filter}
           components={{
             CSidebarNavDivider,
             CSidebarNavDropdown,

@@ -17,8 +17,8 @@ React.icons = icons;
 
 ReactDOM.render(
   <Provider store={store}>
-    <LoadingModal />
     <App />
+    <LoadingModal />
   </Provider>,
   document.getElementById("root")
 );
