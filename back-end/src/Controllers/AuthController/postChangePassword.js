@@ -32,7 +32,7 @@ export default async (req, res) => {
 		let user = await findCurrentUser(req.session.user);
 		await comparePassword(req.body.old_password, user.password);
 
-		user.password = await hashPassword(req.body.password);
+		user.password = req.body.password;
 
 		await user.save();
 		return res.status(204).send();

@@ -1,4 +1,5 @@
 import mongoose from "../plugins/mongoose";
+import bcrypt from "bcrypt";
 
 const Users = mongoose.Schema(
 	{
@@ -35,4 +36,13 @@ const Users = mongoose.Schema(
 		timestamp: true,
 	}
 );
+
+Users.pre("save", function (next) {
+	if (!this.isModified("password")) {
+		return next();
+	}
+	this.password = bcrypt.hashSync(this.password, 10);
+	return next();
+});
+
 export default mongoose.model("User", Users);

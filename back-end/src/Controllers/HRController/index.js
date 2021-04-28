@@ -1,6 +1,4 @@
 import { Router } from "express";
-import Resource from "resourcejs";
-import Users from "../../models/Users";
 
 import getUsers from "./getUsers";
 import createUser from "./createUser";
@@ -9,10 +7,9 @@ import deleteUser from "./deleteUser";
 
 const Route = Router();
 
-Resource(Route, "", "staffs", Users)
-	.index({ ...getUsers })
-	.post({ ...createUser })
-	.patch({ ...updateUser })
-	.delete({ ...deleteUser });
+Route.get("/staffs", getUsers);
+Route.post("/staffs", createUser);
+Route.patch("/staffs/:id", updateUser);
+Route.delete("/staffs/:id", deleteUser);
 
 export default Route;

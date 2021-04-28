@@ -1,11 +1,15 @@
+import Users from "../../models/Users";
 import Authorize from "./libs/authorize";
 import Permission from "./libs/permission";
 
-async function Process(req, res, next) {
+export default async (req, res) => {
 	try {
 		await Authorize(req.session.user);
 		await Permission(req.session.user);
-		return next();
+
+		const users = await Users.find();
+
+		return res.json(users);
 	} catch (err) {
 		if (err === "Forbidden")
 			return res.status(403).json({
@@ -14,8 +18,4 @@ async function Process(req, res, next) {
 			});
 		return res.status(401).send("Unauthorized");
 	}
-}
-
-export default {
-	before: Process,
 };
