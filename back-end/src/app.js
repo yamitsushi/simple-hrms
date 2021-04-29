@@ -10,6 +10,8 @@ server.use(session);
 server.use(cors);
 server.use(Express.json());
 
+server.use("/public", Express.static("public"));
+
 server.use(Middlewares);
 server.use(Routes);
 
