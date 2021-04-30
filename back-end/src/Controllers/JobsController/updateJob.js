@@ -11,7 +11,6 @@ const close = promisify(fs.close);
 
 export default async (req, res) => {
 	try {
-		console.log(req.body);
 		await Authorize(req.session.user);
 		await Permission(req.session.user);
 

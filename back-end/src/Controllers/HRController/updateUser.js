@@ -22,7 +22,6 @@ export default async (req, res) => {
 
 		return res.send(user);
 	} catch (err) {
-		console.log(err);
 		if (err === "Forbidden")
 			return res.status(403).json({
 				title: "403 Forbidden",
