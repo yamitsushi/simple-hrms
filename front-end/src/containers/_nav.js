@@ -22,6 +22,13 @@ const _nav = [
     to: "/jobs",
     icon: <CIcon name="cil-description" customClasses="c-sidebar-nav-icon" />,
   },
+  {
+    _tag: "CSidebarNavItem",
+    lock: "HRIS Manager",
+    name: "Recruitments",
+    to: "/recruitments",
+    icon: <CIcon name="cil-file" customClasses="c-sidebar-nav-icon" />,
+  },
 ];
 
 export default _nav;
