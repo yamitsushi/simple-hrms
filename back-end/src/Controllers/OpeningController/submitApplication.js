@@ -12,6 +12,7 @@ export default async (req, res) => {
 
 		const application = await new Applicants({
 			name: req.body.name,
+			email: req.body.email,
 			bio: req.file.destination + req.file.filename,
 			job,
 		});
