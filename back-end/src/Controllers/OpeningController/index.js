@@ -9,7 +9,7 @@ const Route = Router();
 
 Route.get("/openings", getAvailableJobs);
 Route.post(
-	"/jobs/:id",
+	"/openings/:id",
 	multer({
 		fileFilter: (_req, file, cb) => {
 			if (path.extname(file.originalname).toLowerCase() === ".pdf")
