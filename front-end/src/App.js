@@ -17,6 +17,8 @@ const TheLayout = React.lazy(() => import("./containers/TheLayout"));
 const Login = React.lazy(() => import("./views/pages/login/Login"));
 const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
 
+const Opening = React.lazy(() => import("./views/pages/opening/Opening"));
+
 class App extends Component {
   render() {
     return (
@@ -28,6 +30,12 @@ class App extends Component {
               path="/login"
               name="Login Page"
               component={Login}
+            />
+            <UnauthenticatedRoute
+              exact
+              path="/offers"
+              name="Job Openings"
+              component={Opening}
             />
             <Route
               exact
