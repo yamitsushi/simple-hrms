@@ -8,7 +8,7 @@ import deleteApplicant from "./deleteApplicant";
 const Route = Router();
 
 Route.get("/recruitments", getJobs);
-Route.get("/recruitments/:job/applicants", getApplicants);
+Route.get("/recruitments/:job", getApplicants);
 Route.patch("/recruitments/applicants/:id", updateApplicant);
 Route.delete("/recruitments/applicants/:id", deleteApplicant);
 
