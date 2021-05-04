@@ -1,6 +1,7 @@
 import "dotenv/config";
 import "./plugins/mongoose";
 import app from "./app";
+import websocket from "./plugins/websocket";
 
 let listener = app.listen(
 	process.env.EXPRESS_PORT || 3000,
@@ -11,3 +12,5 @@ let listener = app.listen(
 		);
 	}
 );
+
+websocket(listener);
