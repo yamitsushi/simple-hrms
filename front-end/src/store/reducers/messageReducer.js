@@ -5,7 +5,7 @@ const MessageReducer = (state = initialState, { type, payload }) => {
     case "MESSAGE_SET":
       return payload;
     case "MESSAGE_ADD":
-      return [...state, payload];
+      return [payload, ...state];
     case "MESSAGE_UPDATE":
       return state.map((item) => (item._id === payload._id ? payload : item));
     case "MESSAGE_PURGE":
