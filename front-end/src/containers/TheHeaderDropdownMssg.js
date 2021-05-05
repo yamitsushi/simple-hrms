@@ -11,6 +11,9 @@ import axiosInstance from "src/plugins/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { set } from "src/store/actions/messageAction";
 import moment from "moment";
+import { add } from "src/store/actions/messageAction";
+
+import websocket from "src/plugins/socket.io";
 
 const TheHeaderDropdownMssg = () => {
   const user = useSelector((state) => state.auth);
@@ -20,6 +23,10 @@ const TheHeaderDropdownMssg = () => {
   useEffect(() => {
     axiosInstance.get("/messages").then((response) => {
       dispatch(set(response.data));
+    });
+
+    websocket.on(`create:${user.id}`, (data) => {
+      dispatch(add(data));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
