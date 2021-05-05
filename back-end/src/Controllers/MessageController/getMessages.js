@@ -28,7 +28,6 @@ export default async (req, res) => {
 
 		res.json(messages);
 	} catch (err) {
-		console.log(err);
 		return res.status(401).send("Unauthorized");
 	}
 };
