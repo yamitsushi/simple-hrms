@@ -10,6 +10,12 @@ export const add = (payload) => {
     payload,
   };
 };
+export const update = (payload) => {
+  return {
+    type: "MESSAGE_UPDATE",
+    payload,
+  };
+};
 export const purge = () => {
   return {
     type: "MESSAGE_PURGE",
