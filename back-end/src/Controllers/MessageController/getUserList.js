@@ -1,7 +1,14 @@
 import Users from "../../models/Users";
+import authorize from "./libs/authorize";
 
 export default async (req, res) => {
-	const users = await Users.find().select("name");
+	try {
+		await authorize(req.session.user);
 
-	res.json(users);
+		const users = await Users.find().select("name");
+
+		res.json(users);
+	} catch (err) {
+		return res.status(401).send("Unauthorized");
+	}
 };
