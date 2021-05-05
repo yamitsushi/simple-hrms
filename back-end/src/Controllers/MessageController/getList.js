@@ -9,7 +9,8 @@ export default async (req, res) => {
 			users: { $in: req.session.user.id },
 		})
 			.populate("users", "name")
-			.populate("lastMessages.sender", "name");
+			.populate("lastMessages.sender", "name")
+			.sort({ updatedAt: -1 });
 
 		res.json(rooms);
 	} catch (err) {
