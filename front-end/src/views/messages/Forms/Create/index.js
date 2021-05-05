@@ -12,8 +12,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import axiosInstance from "src/plugins/axios";
 import { Multiselect } from "multiselect-react-dropdown";
-import { useSelector, useDispatch } from "react-redux";
-import { add } from "src/store/actions/messageAction";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Compose(props) {
   const classes = useStyles();
   const history = useHistory();
-  const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth.id);
   const { control, handleSubmit } = useForm();
   const [users, setUsers] = useState([]);
@@ -43,7 +41,6 @@ export default function Compose(props) {
     axiosInstance
       .post("/messages", data)
       .then((response) => {
-        dispatch(add(response.data));
         alert("Room Created");
         history.goBack();
       })
