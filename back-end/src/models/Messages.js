@@ -23,7 +23,6 @@ const Messages = mongoose.Schema(
 				sender: {
 					type: mongoose.Schema.Types.ObjectId,
 					ref: Users,
-					required: true,
 				},
 				date: {
 					type: Date,
