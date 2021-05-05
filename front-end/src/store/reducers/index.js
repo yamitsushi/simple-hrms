@@ -6,6 +6,7 @@ import EmployeeReducer from "./employeeReducer";
 import JobReducer from "./jobReducer";
 import RecruitmentReducer from "./recruitmentReducer";
 import ApplicantReducer from "./applicantReducer";
+import MessageReducer from "./messageReducer";
 
 export default combineReducers({
   sidebar: SidebarReducer,
@@ -14,4 +15,5 @@ export default combineReducers({
   job: JobReducer,
   recruitment: RecruitmentReducer,
   applicant: ApplicantReducer,
+  message: MessageReducer,
 });

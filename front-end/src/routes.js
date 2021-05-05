@@ -11,6 +11,8 @@ const Recruitments = React.lazy(() =>
   import("./views/recruitments/Recruitments")
 );
 const Applicants = React.lazy(() => import("./views/applicants/Applicants"));
+const Messages = React.lazy(() => import("./views/messages/Messages"));
+const CreateMessage = React.lazy(() => import("./views/messages/Forms/Create"));
 
 const routes = [
   { path: "/", exact: true, name: "Home" },
@@ -29,6 +31,13 @@ const routes = [
     path: "/recruitments",
     name: "Recruitment Listing",
     component: Recruitments,
+  },
+  { path: "/messages/create", name: "Create Chat", component: CreateMessage },
+  { path: "/messages/:id", name: "Private Room", component: Messages },
+  {
+    path: "/messages",
+    name: "Messages",
+    component: Messages,
   },
 ];
 
