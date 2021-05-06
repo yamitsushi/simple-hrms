@@ -23,7 +23,7 @@ export default function MessageList(props) {
         ...currentRoom,
         ...{ messages: [...currentRoom.messages, data] },
       }));
-      websocket.emit(`chat:${room._id}`);
+      websocket.emit(`chat`, { room: id });
       scrollToBottom();
     });
     return () => {

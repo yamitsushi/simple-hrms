@@ -17,30 +17,31 @@ export default (server) => {
 	websocket.use(shared(session));
 
 	websocket.on("connection", (socket) => {
-		if (socket.handshake.session.user) {
-			const id = socket.handshake.session.user.id;
+		socket.on("chat", async (data) => {
+			try {
+				const id = socket.handshake.session.user.id;
 
-			socket.on(`chat:${id}`, async (data) => {
-				try {
-					const user = await Users.findById(id);
+				const user = await Users.findById(id);
 
-					const room = await Rooms.findOneAndUpdate(
-						{ _id: data, updated: { $ne: user } },
-						{
-							$push: { updated: user },
-						},
-						{ new: true }
-					);
-					websocket.sockets.emit(
-						`update:${id}`,
-						await room
-							.populate("users", "name")
-							.populate("lastMessage.sender", "name")
-							.execPopulate()
-					);
-				} catch (err) {}
-			});
-		}
+				const room = await Rooms.findOneAndUpdate(
+					{ _id: data.room, updated: { $ne: user } },
+					{
+						$push: { updated: user },
+					},
+					{ new: true }
+				);
+
+				websocket.sockets.emit(
+					`update:${id}`,
+					await room
+						.populate("users", "name")
+						.populate("lastMessage.sender", "name")
+						.execPopulate()
+				);
+			} catch (err) {
+				console.log(err);
+			}
+		});
 	});
 };
 
