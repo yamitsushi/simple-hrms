@@ -75,7 +75,9 @@ const TheHeaderDropdownMssg = () => {
               </div>
               <div className="text-truncate font-weight-bold">{item.title}</div>
               <div className="small text-muted text-truncate">
-                {item.lastMessage.text.length > 75
+                {item.lastMessage.isDocument
+                  ? `uploaded ${item.lastMessage.document.name}`
+                  : item.lastMessage.text.length > 75
                   ? item.lastMessage.text.substring(0, 75) + "..."
                   : item.lastMessage.text}
               </div>

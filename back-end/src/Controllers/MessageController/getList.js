@@ -8,9 +8,10 @@ export default async (req, res) => {
 		const rooms = await Rooms.find({
 			users: { $in: req.session.user.id },
 		})
-			.populate("users", "name")
-			.populate("lastMessages")
-			.sort({ updatedAt: -1 });
+			.sort({ updatedAt: -1 })
+			.populate("lastMessage.sender", "name")
+			.populate("users", "name");
+		console.log(rooms);
 
 		res.json(rooms);
 	} catch (err) {

@@ -25,7 +25,9 @@ export default function ConversationListItem(props) {
         </div>
         <div className="text-truncate font-weight-bold">{title}</div>
         <div className="small text-muted text-truncate">
-          {lastMessage.text.length > 75
+          {lastMessage.isDocument
+            ? `uploaded ${lastMessage.document.name}`
+            : lastMessage.text.length > 75
             ? lastMessage.text.substring(0, 75) + "..."
             : lastMessage.text}
         </div>

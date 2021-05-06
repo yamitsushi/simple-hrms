@@ -4,6 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import axiosInstance from "src/plugins/axios";
 import Modify from "../Forms/Modify";
+import Upload from "../Forms/Upload";
 
 export default function Compose(props) {
   const id = useParams().id;
@@ -20,11 +21,7 @@ export default function Compose(props) {
           <Modify />
         </CCol>
         <CCol sm="2">
-          <form style={{ display: "flex", padding: "10px" }}>
-            <CButton color="primary" block>
-              Upload File
-            </CButton>
-          </form>
+          <Upload />
         </CCol>
         <CCol sm="8">
           <form

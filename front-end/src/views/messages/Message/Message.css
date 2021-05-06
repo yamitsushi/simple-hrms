@@ -41,3 +41,25 @@
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 }
+
+.message .bubble-container .bubble-file {
+  margin: 1px 0px;
+  background: #c0c0c0;
+  color: black;
+  padding: 10px 15px;
+  border-radius: 20px;
+  max-width: 75%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.message.mine .bubble-container .bubble-file {
+  background: #c0c0c0;
+  color: black;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
