@@ -6,6 +6,7 @@ import { CButton } from "@coreui/react";
 import axiosInstance from "src/plugins/axios";
 import { useParams } from "react-router-dom";
 import websocket from "src/plugins/socket.io";
+import Upload from "../Forms/Upload";
 
 export default function MessageList(props) {
   const id = useParams().id;
@@ -58,10 +59,7 @@ export default function MessageList(props) {
 
   return (
     <div className="message-list">
-      <Toolbar
-        title={room.room?.title}
-        rightItems={<CButton>Update</CButton>}
-      />
+      <Toolbar title={room.room?.title} />
 
       <div
         style={{

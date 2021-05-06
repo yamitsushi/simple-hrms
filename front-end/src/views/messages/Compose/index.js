@@ -1,8 +1,9 @@
-import { CButton, CInput } from "@coreui/react";
+import { CButton, CCol, CInput, CRow } from "@coreui/react";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import axiosInstance from "src/plugins/axios";
+import Modify from "../Forms/Modify";
 
 export default function Compose(props) {
   const id = useParams().id;
@@ -14,20 +15,39 @@ export default function Compose(props) {
 
   if (id)
     return (
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        style={{ display: "flex", padding: "10px" }}
-      >
-        <Controller
-          name="message"
-          control={control}
-          render={({ field: { onChange } }) => (
-            <CInput placeholder="Type a Message" onChange={onChange} required />
-          )}
-        />
-        <CButton type={"submit"}>Send</CButton>
-        <CButton>Upload</CButton>
-      </form>
+      <CRow>
+        <CCol sm="2">
+          <Modify />
+        </CCol>
+        <CCol sm="2">
+          <form style={{ display: "flex", padding: "10px" }}>
+            <CButton color="primary" block>
+              Upload File
+            </CButton>
+          </form>
+        </CCol>
+        <CCol sm="8">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            style={{ display: "flex", padding: "10px" }}
+          >
+            <Controller
+              name="message"
+              control={control}
+              render={({ field: { onChange } }) => (
+                <CInput
+                  placeholder="Type a Message"
+                  onChange={onChange}
+                  required
+                />
+              )}
+            />
+            <CButton color="primary" type={"submit"}>
+              Send
+            </CButton>
+          </form>
+        </CCol>
+      </CRow>
     );
   else return "";
 }
