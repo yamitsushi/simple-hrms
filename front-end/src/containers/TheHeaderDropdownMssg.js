@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Component, useEffect } from "react";
 import {
   CBadge,
   CDropdown,
@@ -32,6 +32,10 @@ const TheHeaderDropdownMssg = () => {
     websocket.on(`update:${user.id}`, (data) => {
       dispatch(update(data));
     });
+    return () => {
+      websocket.off(`create:${user.id}`);
+      websocket.off(`update:${user.id}`);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -63,17 +67,17 @@ const TheHeaderDropdownMssg = () => {
             <div className="message" style={{ minWidth: "250px" }}>
               <div>
                 <small className="text-muted">
-                  {item.lastMessages.sender?.name ?? "System Message"}
+                  {item.lastMessage.sender?.name ?? "System Message"}
                 </small>
                 <small className="text-muted float-right mt-1">
-                  {moment(item.lastMessages.date).fromNow()}
+                  {moment(item.lastMessage.date).fromNow()}
                 </small>
               </div>
               <div className="text-truncate font-weight-bold">{item.title}</div>
               <div className="small text-muted text-truncate">
-                {item.lastMessages.text.length > 75
-                  ? item.lastMessages.text.substring(0, 75) + "..."
-                  : item.lastMessages.text}
+                {item.lastMessage.text.length > 75
+                  ? item.lastMessage.text.substring(0, 75) + "..."
+                  : item.lastMessage.text}
               </div>
             </div>
           </CDropdownItem>

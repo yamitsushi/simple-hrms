@@ -1,15 +1,17 @@
 import { CButton, CInput } from "@coreui/react";
-import { Button } from "@material-ui/core";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import axiosInstance from "src/plugins/axios";
 
 export default function Compose(props) {
   const id = useParams().id;
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, reset } = useForm();
 
   function onSubmit(data) {
-    console.log(data);
+    axiosInstance.post(`messages/${id}`, data).then(() => {
+      reset({ message: "" });
+    });
   }
 
   if (id)

@@ -3,7 +3,7 @@ import Users from "./Users";
 
 const Rooms = mongoose.Schema(
 	{
-		lastMessages: {
+		lastMessage: {
 			isDocument: { type: Boolean },
 
 			document: {

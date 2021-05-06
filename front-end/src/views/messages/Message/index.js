@@ -5,18 +5,22 @@ import { useSelector } from "react-redux";
 
 export default function Message(props) {
   const user = useSelector((state) => state.auth);
-  const { _id, sender, date, text, timer } = props;
+  const { sender, date, text, timer } = props;
+  return (
+    <div
+      className={`message ${
+        sender ? (sender._id === user.id ? "mine" : "") : ""
+      }`}
+    >
+      {timer > 10 ? (
+        <div className="timestamp">
+          {moment(date).format("MMMM D, YYYY HH:mm")}
+        </div>
+      ) : (
+        ""
+      )}
 
-  if (sender)
-    return (
-      <div className={`message ${sender._id === user.id ? "mine" : ""}`}>
-        {timer ? (
-          <div className="timestamp">
-            {moment(date).format("MMMM D, YYYY HH:mm")}
-          </div>
-        ) : (
-          ""
-        )}
+      {sender ? (
         <div className="bubble-container">
           <div
             className="bubble"
@@ -25,18 +29,9 @@ export default function Message(props) {
             {text}
           </div>
         </div>
-      </div>
-    );
-  return (
-    <div className="message">
-      {timer ? (
-        <div className="timestamp">
-          {moment(date).format("MMMM D, YYYY HH:mm")}
-        </div>
       ) : (
-        ""
+        <div className="timestamp">{text}</div>
       )}
-      <div className="timestamp">{text}</div>
     </div>
   );
 }

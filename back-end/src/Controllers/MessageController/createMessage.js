@@ -20,7 +20,7 @@ export default async (req, res) => {
 			},
 		});
 
-		room.lastMessages = message.messages[0];
+		room.lastMessage = message.messages[0];
 
 		await room.save();
 		await message.save();

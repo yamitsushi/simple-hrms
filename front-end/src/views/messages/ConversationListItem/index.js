@@ -5,7 +5,7 @@ import "./ConversationListItem.css";
 import { NavLink } from "react-router-dom";
 
 export default function ConversationListItem(props) {
-  const { _id, title, lastMessages } = props.data;
+  const { _id, title, lastMessage } = props.data;
 
   return (
     <>
@@ -17,17 +17,17 @@ export default function ConversationListItem(props) {
       >
         <div>
           <small className="text-muted">
-            {lastMessages.sender?.name ?? "System Message"}
+            {lastMessage.sender?.name ?? "System Message"}
           </small>
           <small className="text-muted float-right mt-1">
-            {moment(lastMessages.date).fromNow()}
+            {moment(lastMessage.date).fromNow()}
           </small>
         </div>
         <div className="text-truncate font-weight-bold">{title}</div>
         <div className="small text-muted text-truncate">
-          {lastMessages.text.length > 75
-            ? lastMessages.text.substring(0, 75) + "..."
-            : lastMessages.text}
+          {lastMessage.text.length > 75
+            ? lastMessage.text.substring(0, 75) + "..."
+            : lastMessage.text}
         </div>
       </NavLink>
     </>

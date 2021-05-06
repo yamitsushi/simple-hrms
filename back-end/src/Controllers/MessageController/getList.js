@@ -9,11 +9,12 @@ export default async (req, res) => {
 			users: { $in: req.session.user.id },
 		})
 			.populate("users", "name")
-			.populate("lastMessages.sender", "name")
+			.populate("lastMessages")
 			.sort({ updatedAt: -1 });
 
 		res.json(rooms);
 	} catch (err) {
+		console.log(err);
 		return res.status(401).send("Unauthorized");
 	}
 };

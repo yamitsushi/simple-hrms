@@ -1,46 +1,59 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Toolbar from "../Toolbar";
 import Message from "../Message";
 import moment from "moment";
 import { CButton } from "@coreui/react";
 import axiosInstance from "src/plugins/axios";
 import { useParams } from "react-router-dom";
+import websocket from "src/plugins/socket.io";
 
 export default function MessageList(props) {
   const id = useParams().id;
-  const [room, setRoom] = useState([]);
+  const [room, setRoom] = useState({});
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     axiosInstance.get(`/messages/${id}`).then((response) => {
       setRoom(response.data);
+      scrollToBottom();
     });
+
+    websocket.on(`chat:${id}`, (data) => {
+      setRoom((currentRoom) => ({
+        ...currentRoom,
+        ...{ messages: [...currentRoom.messages, data] },
+      }));
+      websocket.emit(`chat:${room._id}`);
+      scrollToBottom();
+    });
+    return () => {
+      websocket.off(`chat:${id}`);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, []);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const renderMessages = () => {
-    let messages = [];
     let timestamp;
 
-    messages = room.messages?.map((message) => {
+    const output = room.messages?.map((message, index) => {
       let config = {
         timer: 0,
         isToday: false,
       };
       if (timestamp) {
-        let duration = timestamp.diff(timestamp).as("minutes");
-
-        if (duration < 10) timestamp = moment(message.date);
-        else config.timer = duration;
+        config.timer = moment(message.date).diff(timestamp, "minutes");
       } else {
         config.timer = 100;
-        timestamp = moment(message.date);
       }
+      timestamp = moment(message.date);
 
-      config.isToday = moment(message.date);
-
-      return <Message key={message._id} {...message} {...config} />;
+      return <Message key={index} {...message} {...config} />;
     });
-    return messages;
+    return output;
   };
 
   return (
@@ -53,10 +66,10 @@ export default function MessageList(props) {
       <div
         style={{
           padding: "10px",
-          paddingBottom: "70px",
         }}
       >
         {renderMessages()}
+        <div ref={messagesEndRef} />
       </div>
     </div>
   );

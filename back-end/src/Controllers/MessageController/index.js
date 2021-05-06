@@ -4,6 +4,7 @@ import getList from "./getList";
 import getUserList from "./getUserList";
 import createMessage from "./createMessage";
 import getMessages from "./getMessages";
+import postMessage from "./postMessage";
 
 const Route = Router();
 
@@ -11,5 +12,6 @@ Route.get("/messages", getList);
 Route.get("/messages/users", getUserList);
 Route.post("/messages", createMessage);
 Route.get("/messages/:id", getMessages);
+Route.post("/messages/:id", postMessage);
 
 export default Route;
