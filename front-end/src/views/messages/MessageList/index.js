@@ -30,7 +30,7 @@ export default function MessageList(props) {
       websocket.off(`chat:${id}`);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
