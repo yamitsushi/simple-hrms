@@ -6,12 +6,10 @@ import axiosInstance from "src/plugins/axios";
 
 export default function Compose(props) {
   const id = useParams().id;
-  const { control, handleSubmit, reset } = useForm();
+  const { control, handleSubmit } = useForm();
 
   function onSubmit(data) {
-    axiosInstance.post(`messages/${id}`, data).then(() => {
-      reset({ message: "" });
-    });
+    axiosInstance.post(`messages/${id}`, data);
   }
 
   if (id)
