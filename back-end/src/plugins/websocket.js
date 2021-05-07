@@ -9,7 +9,7 @@ let websocket;
 export default (server) => {
 	websocket = socket(server, {
 		cors: {
-			origin: "http://127.0.0.1:3000",
+			origin: process.env.FRONT_END_ORIGIN,
 			methods: ["GET", "POST"],
 			credentials: true,
 		},
