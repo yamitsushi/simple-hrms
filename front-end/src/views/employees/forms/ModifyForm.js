@@ -27,7 +27,7 @@ function Content({ departments, positions, user }) {
 
   const onSubmit = (data) => {
     axiosInstance
-      .patch("/staffs/" + user._id, data)
+      .patch(`/staffs/${user._id}`, data)
       .then((response) => {
         dispatch(update(response.data));
         alert("Account Updated Succesfully");
@@ -39,7 +39,7 @@ function Content({ departments, positions, user }) {
 
   const onDeleteForm = () => {
     axiosInstance
-      .delete("/staffs/" + user._id)
+      .delete(`/staffs/${user._id}`)
       .then((_response) => {
         dispatch(remove(user._id));
         alert("Account Deleted Successfully");
