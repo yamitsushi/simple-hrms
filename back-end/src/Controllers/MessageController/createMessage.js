@@ -25,23 +25,14 @@ export default async (req, res) => {
 		await room.save();
 		await message.save();
 
+		const tempRoom = await room.populate("users", "name").execPopulate();
+
 		req.body.users.forEach((user) => {
-			websocket.sockets.emit(`create:${user._id}`, room);
+			websocket.sockets.emit(`create:${user._id}`, tempRoom);
 		});
 
-		res.send(
-			await room
-				.populate("users", "name")
-				.populate("lastMessages.sender", "name")
-				.execPopulate()
-		);
+		res.send("");
 	} catch (err) {
-		console.log(err);
-		if (err.code === 11000)
-			return res.status(409).json({
-				title: "409 Duplicated data",
-				message: "Account already exist",
-			});
 		return res.status(401).send("Unauthorized");
 	}
 };

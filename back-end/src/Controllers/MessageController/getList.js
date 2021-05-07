@@ -11,11 +11,9 @@ export default async (req, res) => {
 			.sort({ updatedAt: -1 })
 			.populate("lastMessage.sender", "name")
 			.populate("users", "name");
-		console.log(rooms);
 
 		res.json(rooms);
 	} catch (err) {
-		console.log(err);
 		return res.status(401).send("Unauthorized");
 	}
 };

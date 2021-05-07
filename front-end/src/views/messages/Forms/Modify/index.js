@@ -29,17 +29,12 @@ export default function Upload(props) {
   );
   const [users, setUsers] = useState([]);
 
-  const { control, handleSubmit, setValue } = useForm();
+  const { control, handleSubmit } = useForm();
   const [modal, setModal] = useState(false);
 
   function onSubmit(data) {
     axiosInstance.patch(`/messages/${id}`, data);
   }
-
-  useEffect(() => {
-    setValue("title", "test");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props]);
 
   useEffect(() => {
     axiosInstance.get("messages/users").then((response) => {

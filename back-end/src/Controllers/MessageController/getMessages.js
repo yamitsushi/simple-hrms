@@ -21,10 +21,12 @@ export default async (req, res) => {
 			.populate("messages.sender", "name")
 			.populate("room", "title");
 
-		if (room)
+		if (room) {
+			const tempRoom = await room.populate("users", "name").execPopulate();
 			room.users.forEach((user) => {
-				websocket.sockets.emit(`update:${user._id}`, room);
+				websocket.sockets.emit(`update:${user._id}`, tempRoom);
 			});
+		}
 
 		res.json(messages);
 	} catch (err) {
