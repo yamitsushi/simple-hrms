@@ -28,7 +28,7 @@ const Applicants = mongoose.Schema(
 		},
 	},
 	{
-		timestamp: true,
+		timestamps: true,
 	}
 );
 

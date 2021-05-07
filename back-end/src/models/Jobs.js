@@ -16,7 +16,7 @@ const Jobs = mongoose.Schema(
 		},
 	},
 	{
-		timestamp: true,
+		timestamps: true,
 	}
 );
 
