@@ -4,6 +4,7 @@ export const set = (payload) => {
     payload,
   };
 };
+
 export const purge = () => {
   return {
     type: "RECRUITMENT_PURGE",

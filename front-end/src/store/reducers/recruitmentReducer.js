@@ -1,11 +1,13 @@
 const initialState = [];
 
-const RecruitmentReducer = (state = initialState, action) => {
-  switch (action.type) {
+const RecruitmentReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
     case "RECRUITMENT_SET":
-      return [...state, ...action.payload];
+      return [...state, ...payload];
+
     case "RECRUITMENT_PURGE":
       return [];
+
     default:
       return state;
   }

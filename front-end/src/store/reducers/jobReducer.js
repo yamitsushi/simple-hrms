@@ -1,17 +1,19 @@
 const initialState = [];
 
-const JobReducer = (state = initialState, action) => {
-  switch (action.type) {
+const JobReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
     case "JOB_SET":
-      return [...state, ...action.payload];
+      return [...state, ...payload];
+
     case "JOB_ADD":
-      return [...state, action.payload];
+      return [...state, payload];
+
     case "JOB_UPDATE":
-      return state.map((item) =>
-        item._id === action.payload._id ? action.payload : item
-      );
+      return state.map((item) => (item._id === payload._id ? payload : item));
+
     case "JOB_PURGE":
       return [];
+
     default:
       return state;
   }

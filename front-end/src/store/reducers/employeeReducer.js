@@ -1,19 +1,22 @@
 const initialState = [];
 
-const EmployeeReducer = (state = initialState, action) => {
-  switch (action.type) {
+const EmployeeReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
     case "EMPLOYEE_SET":
-      return [...state, ...action.payload];
+      return [...state, ...payload];
+
     case "EMPLOYEE_ADD":
-      return [...state, action.payload];
+      return [...state, payload];
+
     case "EMPLOYEE_REMOVE":
-      return state.filter((item) => item._id !== action.payload);
+      return state.filter((item) => item._id !== payload);
+
     case "EMPLOYEE_UPDATE":
-      return state.map((item) =>
-        item._id === action.payload._id ? action.payload : item
-      );
+      return state.map((item) => (item._id === payload._id ? payload : item));
+
     case "EMPLOYEE_PURGE":
       return [];
+
     default:
       return state;
   }

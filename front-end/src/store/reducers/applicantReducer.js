@@ -1,19 +1,22 @@
 const initialState = [];
 
-const ApplicantReducer = (state = initialState, action) => {
-  switch (action.type) {
+const ApplicantReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
     case "APPLICANT_SET":
-      return [...state, ...action.payload];
+      return [...state, ...payload];
+
     case "APPLICANT_ADD":
-      return [...state, action.payload];
+      return [...state, payload];
+
     case "APPLICANT_REMOVE":
-      return state.filter((item) => item._id !== action.payload);
+      return state.filter((item) => item._id !== payload);
+
     case "APPLICANT_UPDATE":
-      return state.map((item) =>
-        item._id === action.payload._id ? action.payload : item
-      );
+      return state.map((item) => (item._id === payload._id ? payload : item));
+
     case "APPLICANT_PURGE":
       return [];
+
     default:
       return state;
   }
