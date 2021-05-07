@@ -88,7 +88,7 @@ const Listing = ({ table }) => {
   const history = useHistory();
 
   const openSelected = (item) => {
-    history.push("/recruitments/" + item._id);
+    history.push(`/recruitments/${item._id}`);
   };
 
   let handleChangePage = (event, newPage) => {
