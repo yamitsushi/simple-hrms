@@ -1,6 +1,6 @@
 import Jobs from "../../models/Jobs";
 
-export default async (req, res) => {
+export default async (_req, res) => {
 	try {
 		const jobs = await Jobs.find({ status: "Active" });
 
