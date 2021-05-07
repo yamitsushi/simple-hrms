@@ -1,6 +1,6 @@
 import Users from "../../models/Users";
-import Authorize from "./libs/authorize";
-import Permission from "./libs/permission";
+import Authorize from "../library/authorize";
+import Permission from "../library/permission";
 
 export default async (req, res) => {
 	try {

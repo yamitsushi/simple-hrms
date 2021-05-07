@@ -1,9 +1,9 @@
 import Rooms from "../../models/Rooms";
-import authorize from "./libs/authorize";
+import Authorize from "../library/authorize";
 
 export default async (req, res) => {
 	try {
-		await authorize(req.session.user);
+		await Authorize(req.session.user);
 
 		const rooms = await Rooms.find({
 			users: { $in: req.session.user.id },

@@ -1,7 +1,7 @@
 import Applicants from "../../models/Applicants";
 import Jobs from "../../models/Jobs";
-import Authorize from "./libs/authorize";
-import Permission from "./libs/permission";
+import Authorize from "../library/authorize";
+import Permission from "../library/permission";
 
 export default async (req, res) => {
 	try {

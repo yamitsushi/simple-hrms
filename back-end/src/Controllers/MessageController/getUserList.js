@@ -1,9 +1,9 @@
 import Users from "../../models/Users";
-import authorize from "./libs/authorize";
+import Authorize from "../library/authorize";
 
 export default async (req, res) => {
 	try {
-		await authorize(req.session.user);
+		await Authorize(req.session.user);
 
 		const users = await Users.find().select("name");
 
