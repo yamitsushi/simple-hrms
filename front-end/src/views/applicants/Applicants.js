@@ -26,7 +26,7 @@ function Recruitments() {
 
   useEffect(() => {
     dispatch(purge());
-    axiosInstance.get("/recruitments/" + id).then((response) => {
+    axiosInstance.get(`/recruitments/${id}`).then((response) => {
       dispatch(set(response.data));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

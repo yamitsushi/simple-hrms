@@ -27,7 +27,7 @@ function Content({ user }) {
 
   const onSubmit = (data) => {
     axiosInstance
-      .patch("/recruitments/applicants/" + user._id, data)
+      .patch(`/recruitments/applicants/${user._id}`, data)
       .then((response) => {
         dispatch(update(response.data));
         alert("Application Updated Succesfully");
@@ -39,7 +39,7 @@ function Content({ user }) {
 
   const onDeleteForm = () => {
     axiosInstance
-      .delete("/recruitments/applicants/" + user._id)
+      .delete(`/recruitments/applicants/${user._id}`)
       .then((_response) => {
         dispatch(remove(user._id));
         alert("Application Deleted Successfully");

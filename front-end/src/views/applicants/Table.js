@@ -108,7 +108,7 @@ const Listing = ({ table }) => {
 
   const downloadResume = ({ name, bio }) => {
     axiosInstance.get(bio).then((response) => {
-      fileDownload(response.data, name + ".pdf");
+      fileDownload(response.data, `${name}.pdf`);
     });
   };
   return (
