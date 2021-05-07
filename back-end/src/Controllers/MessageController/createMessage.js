@@ -31,7 +31,7 @@ export default async (req, res) => {
 			websocket.sockets.emit(`create:${user._id}`, tempRoom);
 		});
 
-		res.send("");
+		return res.status(204).send();
 	} catch (err) {
 		return res.status(401).send("Unauthorized");
 	}
