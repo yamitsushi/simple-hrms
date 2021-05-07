@@ -56,7 +56,7 @@ const Opening = () => {
     form.append("bio", data.bio);
 
     axiosInstance
-      .post("/openings/" + highlight.id, form, {
+      .post(`/openings/${highlight.id}`, form, {
         headers: { "content-Type": "multipart/form-data" },
         contentType: false,
         processData: false,
