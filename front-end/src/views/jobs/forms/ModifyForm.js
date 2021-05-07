@@ -120,7 +120,7 @@ const ModifyForm = () => {
               justify="space-between"
               alignItems="center"
             >
-              <Grid item sm={3}>
+              <Grid item xs={12} sm={6} lg={3}>
                 <Controller
                   name="title"
                   control={control}
@@ -135,7 +135,7 @@ const ModifyForm = () => {
                   )}
                 />
               </Grid>
-              <Grid item sm={3}>
+              <Grid item xs={12} sm={6} lg={3}>
                 <Controller
                   name="status"
                   control={control}
