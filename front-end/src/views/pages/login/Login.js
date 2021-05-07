@@ -54,7 +54,7 @@ const Login = () => {
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol md="4">
+          <CCol style={{ maxWidth: "500px" }}>
             <CCardGroup>
               <CCard className="p-4">
                 <form
