@@ -88,7 +88,7 @@ const Listing = ({ table }) => {
   const history = useHistory();
 
   const openModify = (item) => {
-    history.push("/jobs/" + item._id);
+    history.push(`/jobs/${item._id}`);
   };
 
   let handleChangePage = (event, newPage) => {
