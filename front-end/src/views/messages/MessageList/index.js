@@ -2,14 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import Toolbar from "../Toolbar";
 import Message from "../Message";
 import moment from "moment";
-import { CButton } from "@coreui/react";
 import axiosInstance from "src/plugins/axios";
 import { useParams } from "react-router-dom";
 import websocket from "src/plugins/socket.io";
-import Upload from "../Forms/Upload";
+import { useSelector } from "react-redux";
 
 export default function MessageList(props) {
   const id = useParams().id;
+  const title = useSelector(
+    (state) => state.message.filter((state) => state._id === id)[0].title
+  );
   const [room, setRoom] = useState({});
   const messagesEndRef = useRef(null);
 
@@ -18,6 +20,7 @@ export default function MessageList(props) {
       setRoom(response.data);
       scrollToBottom();
     });
+    console.log(room);
 
     websocket.on(`chat:${id}`, (data) => {
       setRoom((currentRoom) => ({
@@ -59,7 +62,7 @@ export default function MessageList(props) {
 
   return (
     <div className="message-list">
-      <Toolbar title={room.room?.title} />
+      <Toolbar title={title} />
 
       <div
         style={{
