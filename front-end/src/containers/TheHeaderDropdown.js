@@ -16,7 +16,7 @@ const TheHeaderDropdown = () => {
   const history = useHistory();
 
   const logout = () => {
-    axiosInstance.post("/logout").then((response) => {
+    axiosInstance.post("/logout").then(() => {
       dispatch(set(""));
       history.push("/login");
     });
